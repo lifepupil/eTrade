@@ -2,31 +2,33 @@
 
 angular.module('eTrade')
 .controller('PortfoliosShowCtrl', function($scope, $state, Portfolio, Stock, $rootScope, $firebaseArray){
+  console.log('PortfoliosShowCtrl initialized');
   $scope.name = $state.params.name;
-  console.log($scope.name);
+  console.log('scope name', $scope.name);
   $scope.stocks = Portfolio.getStocks($state.params.name);
-  console.log($scope.stocks);
+  console.log('scope stocks', $scope.stocks);
   $scope.stocks.$watch(computePosition);
 
   // $scope.currentPrice = function() {
   // };
 
-  $scope.sellStock = function(stock) {
+  $scope.sellStock = function(stock, index) {
     Portfolio.currentPrice(stock.symbol.toUpperCase())
     .then(function(response) {
       var total = response.data.LastPrice * stock.quantity;
 
       console.log($rootScope.afUser.balance, total);
       $rootScope.afUser.balance += total;
+      $rootScope.afUser.$save();
+
       console.log($rootScope.afUser.balance);
 
       var fbPortfolios = $rootScope.fbUser.child('portfolios/' + $state.params.name);
       var afPortfolios = $firebaseArray(fbPortfolios);
 
-      console.log(afPortfolios.$indexFor(stock.$id));
-
-      return afPortfolios.$remove(afPortfolios.$indexFor(stock.$id));
-
+      afPortfolios.$loaded().then(function() {
+        afPortfolios.$remove(index);
+      });
     });
   };
 
