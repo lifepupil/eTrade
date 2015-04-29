@@ -16,5 +16,4 @@ angular.module('eTrade')
   .state('portfolios.list', {url: '', templateUrl: '/views/portfolios/portfolios-list.html', controller: 'PortfoliosListCtrl'})
   .state('portfolios.new', {url: '/new', templateUrl: '/views/portfolios/portfolios-new.html', controller: 'PortfoliosNewCtrl'})
   .state('portfolios.show', {url: '/{name}', templateUrl: '/views/portfolios/portfolios-show.html', controller: 'PortfoliosShowCtrl'});
-  
 });
