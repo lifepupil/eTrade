@@ -1,4 +1,4 @@
 'use strict';
 
 angular.module('eTrade')
-.constant('firebaseUrl', 'https://etrade.firebaseio.com/');
+.constant('firebaseUrl', 'https://stock-market-angular.firebaseio.com/');

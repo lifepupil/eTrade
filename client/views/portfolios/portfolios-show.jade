@@ -17,6 +17,7 @@ h3 {{name | uppercase}} : {{position | currency}}
     table.table.table-striped
       thead
         tr
+          th 
           th Symbol
           th Price
           th Quantity
@@ -24,6 +25,7 @@ h3 {{name | uppercase}} : {{position | currency}}
           th Purchased
       tbody
         tr(ng-repeat='stock in stocks')
+          td: button.btn.btn-success(ng-click='sellStock(stock)') Sell
           td {{stock.symbol}}
           td {{stock.quote | currency}}
           td {{stock.quantity}}
