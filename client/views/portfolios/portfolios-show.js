@@ -4,8 +4,10 @@ angular.module('eTrade')
 .controller('PortfoliosShowCtrl', function($scope, $state, Portfolio, Stock, $rootScope, $firebaseArray){
   console.log('PortfoliosShowCtrl initialized');
   $scope.name = $state.params.name;
+
   console.log('scope name', $scope.name);
   $scope.stocks = Portfolio.getStocks($state.params.name);
+
   console.log('scope stocks', $scope.stocks);
   $scope.stocks.$watch(computePosition);
 
